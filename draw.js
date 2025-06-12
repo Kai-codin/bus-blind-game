@@ -362,4 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
         startScreen();
     }
 
+    window.left = left;
+    window.right = right;
+    window.up = up;
 });

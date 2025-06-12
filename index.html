@@ -2,40 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Dot Matrix Display</title>
     <script src="charset.js"></script>
     <script src="draw.js"></script>
-    <script src="main.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
     <style>
-        .matrix {
-            display: grid;
-            grid-template-columns: repeat(163, 6px); /* adjust if scaling more */
-            gap: 1px;
-            width: max-content;
-            margin: 20px;
-            border: 5px solid black
+        html {
+            background: #333;
         }
 
+        /* Container for dot matrix */
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(163, 1fr); /* 163 equal columns */
+            gap: 1px;
+            max-width: calc(100vw - 10px); /* viewport width minus border */
+            margin: 20px auto;
+            border: 5px solid black;
+            /* ensure container shrinks on small screens */
+            box-sizing: border-box;
+        }
+
+        /* Each dot */
         .dot {
-            width: 6px;
-            height: 6px;
+            aspect-ratio: 1 / 1; /* keep dots square */
+            width: 100%; /* fill the grid cell */
+            max-width: calc((100vw - 10px - (162px * 1px)) / 163); /* max width per dot */
             border-radius: 50%;
             background-color: #141414;
             transition: background-color 0.2s;
+            box-sizing: border-box;
         }
 
+        /* Dot active state */
         .on {
             background-color: rgb(236, 140, 29);
         }
-        html {
-            background: #333;
+
+        /* Controls container */
+        .controlls {
+            width: 100%;
+            position: relative;
+            margin: 0;
+            display: grid;
+            grid-auto-flow: column;
+            gap: 10px;
+            padding: 5px;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        /* Buttons styling */
+        button {
+            font-size: 16px;
+            padding: 10px 16px;
+            cursor: pointer;
+            border: none;
+            background: white;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 768px) {
+            button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .controlls {
+                gap: 8px;
+                padding: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+
+            .controlls {
+                gap: 5px;
+                padding: 3px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="matrix" id="dotMatrix"></div>
+    <div class="controlls">
+        <button onclick="left()">&lt;</button>
+        <button onclick="up()">^</button>
+        <button onclick="right()">&gt;</button>
+    </div>
 </body>
 
 </html>
