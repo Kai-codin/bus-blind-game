@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dot Matrix Display</title>
+    <script src="charset.js"></script>
+    <script src="draw.js"></script>
+    <script src="main.js" defer></script>
+    <style>
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(163, 6px); /* adjust if scaling more */
+            gap: 1px;
+            width: max-content;
+            margin: 20px;
+            border: 5px solid black
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #141414;
+            transition: background-color 0.2s;
+        }
+
+        .on {
+            background-color: rgb(236, 140, 29);
+        }
+        html {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="matrix" id="dotMatrix"></div>
+</body>
+
+</html>
